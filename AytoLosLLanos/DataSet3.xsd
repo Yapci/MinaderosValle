@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="DataSet3" targetNamespace="http://tempuri.org/DataSet3.xsd" xmlns:mstns="http://tempuri.org/DataSet3.xsd" xmlns="http://tempuri.org/DataSet3.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections />
+        <Tables />
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="DataSet3" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="DataSet3" msprop:Generator_UserDSName="DataSet3">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="DataTable1" msprop:Generator_TableClassName="DataTable1DataTable" msprop:Generator_TableVarName="tableDataTable1" msprop:Generator_TablePropName="DataTable1" msprop:Generator_RowDeletingName="DataTable1RowDeleting" msprop:Generator_RowChangingName="DataTable1RowChanging" msprop:Generator_RowEvHandlerName="DataTable1RowChangeEventHandler" msprop:Generator_RowDeletedName="DataTable1RowDeleted" msprop:Generator_UserTableName="DataTable1" msprop:Generator_RowChangedName="DataTable1RowChanged" msprop:Generator_RowEvArgName="DataTable1RowChangeEvent" msprop:Generator_RowClassName="DataTable1Row">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="Fecha" msprop:Generator_ColumnVarNameInTable="columnFecha" msprop:Generator_ColumnPropNameInRow="Fecha" msprop:Generator_ColumnPropNameInTable="FechaColumn" msprop:Generator_UserColumnName="Fecha" type="xs:string" minOccurs="0" />
+              <xs:element name="DepositoNivel" msdata:Caption="Caudal" msprop:Generator_ColumnVarNameInTable="columnDepositoNivel" msprop:Generator_ColumnPropNameInRow="DepositoNivel" msprop:Generator_ColumnPropNameInTable="DepositoNivelColumn" msprop:Generator_UserColumnName="DepositoNivel" type="xs:string" minOccurs="0" />
+              <xs:element name="DepositoVolumen" msdata:Caption="Acumulado" msprop:Generator_ColumnVarNameInTable="columnDepositoVolumen" msprop:Generator_ColumnPropNameInRow="DepositoVolumen" msprop:Generator_ColumnPropNameInTable="DepositoVolumenColumn" msprop:Generator_UserColumnName="DepositoVolumen" type="xs:string" minOccurs="0" />
+              <xs:element name="TeniscaCaudal" msdata:Caption="Nivel" msprop:Generator_ColumnVarNameInTable="columnTeniscaCaudal" msprop:Generator_ColumnPropNameInRow="TeniscaCaudal" msprop:Generator_ColumnPropNameInTable="TeniscaCaudalColumn" msprop:Generator_UserColumnName="TeniscaCaudal" type="xs:string" minOccurs="0" />
+              <xs:element name="TeniscaAcumulado" msdata:Caption="Volumen" msprop:Generator_ColumnVarNameInTable="columnTeniscaAcumulado" msprop:Generator_ColumnPropNameInRow="TeniscaAcumulado" msprop:Generator_ColumnPropNameInTable="TeniscaAcumuladoColumn" msprop:Generator_UserColumnName="TeniscaAcumulado" type="xs:string" minOccurs="0" />
+              <xs:element name="VasoNorteCaudal" msdata:Caption="Tension" msprop:Generator_ColumnVarNameInTable="columnVasoNorteCaudal" msprop:Generator_ColumnPropNameInRow="VasoNorteCaudal" msprop:Generator_ColumnPropNameInTable="VasoNorteCaudalColumn" msprop:Generator_UserColumnName="VasoNorteCaudal" type="xs:string" minOccurs="0" />
+              <xs:element name="VasoNorteAcumulado" msprop:Generator_ColumnVarNameInTable="columnVasoNorteAcumulado" msprop:Generator_ColumnPropNameInRow="VasoNorteAcumulado" msprop:Generator_ColumnPropNameInTable="VasoNorteAcumuladoColumn" msprop:Generator_UserColumnName="VasoNorteAcumulado" type="xs:string" minOccurs="0" />
+              <xs:element name="VasoSurCaudal" msprop:Generator_ColumnVarNameInTable="columnVasoSurCaudal" msprop:Generator_ColumnPropNameInRow="VasoSurCaudal" msprop:Generator_ColumnPropNameInTable="VasoSurCaudalColumn" msprop:Generator_UserColumnName="VasoSurCaudal" type="xs:string" minOccurs="0" />
+              <xs:element name="VasoSurAcumulado" msprop:Generator_ColumnVarNameInTable="columnVasoSurAcumulado" msprop:Generator_ColumnPropNameInRow="VasoSurAcumulado" msprop:Generator_ColumnPropNameInTable="VasoSurAcumuladoColumn" msprop:Generator_UserColumnName="VasoSurAcumulado" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+    <xs:unique name="DataTable1Key1">
+      <xs:selector xpath=".//mstns:DataTable1" />
+      <xs:field xpath="mstns:Fecha" />
+    </xs:unique>
+  </xs:element>
+</xs:schema>

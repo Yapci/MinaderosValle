@@ -1,0 +1,107 @@
+﻿@model AytoLosLLanos.Models.LoginModel
+
+@{
+    ViewBag.Title = "Log in";
+}
+
+
+
+@if (!HttpContext.Current.User.Identity.IsAuthenticated){
+    using (Html.BeginForm(new { ReturnUrl = ViewBag.ReturnUrl })) {
+        @Html.AntiForgeryToken()
+            <br />
+            <br />
+    if (Request.Browser.IsMobileDevice == false) {
+            <div style="border: 2px solid #ECECEC;margin: 0px auto;position: relative;padding-left: 0.9375rem;padding-right: 0.9375rem;margin-top:100px;
+    width: 33.3333%;">
+                <div style="margin: 0px -15px;color: white;padding: 10px 10px 10px 30px;background-color: #51b6d9;">
+                    <p style="font-size: 26px;">
+                        <i style="font-style: italic;line-height: inherit;">
+                            <b style="font-weight:bold; color:white">
+                                Hola. ¿Quién eres?
+                            </b>
+                        </i>
+                    </p>
+                </div>
+                <div style="margin: 0px -15px;padding: 10px 30px;background-color: #F9F9F9;">
+                    <p style="font-family: inherit;font-weight: normal;font-size: 1rem;line-height: 1.6;margin-bottom: 1.25rem;text-rendering: optimizelegibility;">
+                        Introduce el nombre de usuario/a:
+                    </p>
+                    <label style="font-size: 0.875rem;color: #4D4D4D;cursor: pointer;display: block;font-weight: normal;line-height: 1.5;margin-bottom: 0px;">
+                            @Html.TextBoxFor(m => m.UserName, new  {  placeholder = "Nombre de usuario", style = "background-color: #FFFFCD !important;font-size: 0.875rem;padding: 0.5rem;height: 2.3125rem"})
+                    </label>
+                </div>
+                <div style="display: block;margin: 0px -15px;padding: 10px 30px;">
+                    <input type="password"  style="width:100%; background-color: #FFF;font-family: inherit;border: 1px solid #CCC;box-shadow: none;color: rgba(0, 0, 0, 0.75);display: block;
+    font-size: 0.875rem;padding: 0.5rem;height: 2.3125rem;box-sizing: border-box;transition: box-shadow 0.45s ease 0s, border-color 0.45s ease-in-out 0s;" 
+                        placeholder="Escribe tu contraseña" name="password" id="password"/>
+                    <button style="background-color: #B61F1A;color: #FFF;border-style: solid;border-width: 0px;cursor: pointer;font-weight: normal;
+    line-height: normal;margin: 40px 0px 1.25rem;position: relative;text-decoration: none;text-align: center;display: inline-block;background-color: #51b6d9;
+    border-color: #B61F1A;color: #FFF;transition: background-color 300ms ease-out 0s;padding: 1rem 2rem 1.0625rem;font-size: 1rem;">
+                        Identificarse
+                    </button>
+                </div>
+                <div style="font-size: 12px;margin-bottom: 5%;text-align: center;position: relative;
+    padding-left: 0.9375rem;padding-right: 0.9375rem;">
+                    @*<span>
+                        <strong style="font-weight: bold;">¿Estas registrado/a?</strong>
+                        Solicitud de registro
+                    </span>
+                    <a href="@Url.Action("Register", "Account", "Registrer")" style="color: #D11A1E;">aquí</a>*@
+                </div>
+            </div>  
+
+        }
+        else
+        {
+            <div style="border: 2px solid #ECECEC;margin: 0px auto;position: relative;padding-left: 0.9375rem;padding-right: 0.9375rem;">
+                <div style="margin: 0px -15px;color: white;padding: 10px 10px 10px 30px;background-color: #51b6d9;">
+                    <p style="font-size: 26px;">
+                        <i style="font-style: italic;line-height: inherit;">
+                            <b style="font-weight:bold; color:white">
+                                Hola. ¿Quién eres?
+                            </b>
+                        </i>
+                    </p>
+                </div>
+                <div style="margin: 0px -15px;padding: 10px 30px;background-color: #F9F9F9;">
+                    <p style="font-family: inherit;font-weight: normal;font-size: 1rem;line-height: 1.6;margin-bottom: 1.25rem;text-rendering: optimizelegibility;">
+                        Introduce el nombre de usuario/a:
+                    </p>
+                    <label style="font-size: 0.875rem;color: #4D4D4D;cursor: pointer;display: block;font-weight: normal;line-height: 1.5;margin-bottom: 0px;">
+                            @Html.TextBoxFor(m => m.UserName, new  {  placeholder = "Nombre de usuario", style = "background-color: #FFFFCD !important;font-size: 0.875rem;padding: 0.5rem;height: 2.3125rem"})
+                    </label>
+                </div>
+                <div style="display: block;margin: 0px -15px;padding: 10px 30px;">
+                    <input type="password"  style="width:100%; background-color: #FFF;font-family: inherit;border: 1px solid #CCC;box-shadow: none;color: rgba(0, 0, 0, 0.75);display: block;
+    font-size: 0.875rem;padding: 0.5rem;height: 2.3125rem;box-sizing: border-box;transition: box-shadow 0.45s ease 0s, border-color 0.45s ease-in-out 0s;" 
+                        placeholder="Escribe tu contraseña" name="password" id="password1"/>
+                    <button style="background-color: #B61F1A;color: #FFF;border-style: solid;border-width: 0px;cursor: pointer;font-weight: normal;
+    line-height: normal;margin: 40px 0px 1.25rem;position: relative;text-decoration: none;text-align: center;display: inline-block;background-color: #51b6d9;
+    border-color: #B61F1A;color: #FFF;transition: background-color 300ms ease-out 0s;padding: 1rem 2rem 1.0625rem;font-size: 1rem;">
+                        Identificarse
+                    </button>
+                </div>
+                <div style="font-size: 12px;margin-bottom: 5%;text-align: center;position: relative;
+    padding-left: 0.9375rem;padding-right: 0.9375rem;">
+                    @*<span>
+                        <strong style="font-weight: bold;">¿Estas registrado/a?</strong>
+                        Solicitud de registro
+                    </span>
+                    <a href="@Url.Action("Register", "Account", "Registrer")" style="color: #D11A1E;">aquí</a>*@
+                </div>
+            </div>  
+    }
+        <div style="margin: 0px auto;position: relative;padding-left: 0.9375rem;padding-right: 0.9375rem;margin-top:50px; font-size:18px;
+    width: 33.3333%;">
+                @Html.ValidationSummary(true)
+    </div>   
+    }
+}
+
+
+
+@*@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}*@
+

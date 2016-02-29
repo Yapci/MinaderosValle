@@ -1,0 +1,48 @@
+﻿@model AytoLosLLanos.Models.EstacionSinoptico
+@{
+    //ViewBag.Title = "Inicio - Consejo Insular de Aguas";
+    ViewBag.Title = "Inicio - Minaderos-Valle";
+}
+
+@*<h2>Index</h2>*@
+
+@*../../ConsejoInsular*@
+
+<section id="banner" style="height:80px;background-image:url(/GestionDeStock/ConsejoInsular/images/water.jpg);">
+@*				<h2 style="color:#023d89">CONTROL DE ESTACIONES</h2>*@
+@*				<p style="font-size:40px;">Bienvanido/a</p>*@
+@*				<ul class="actions">
+					<li>
+						<a href="http://www.youtube.com/watch?v=8M81_FRbTLc" class="button big">Historia del Agua</a>
+					</li>
+				</ul>*@	
+    		</section>
+
+<div id="partial" width:100%">
+            @Html.Partial("Partial2", Model)
+</div>
+
+<script src="~/Scripts/jquery-1.8.2.min.js"></script>
+    <script type="text/javascript" src="~/Scripts/jQuery.print.js"></script>  
+    <script type="text/javascript">
+        var timer = setInterval(function () { refresh() }, 300000);    // server
+            //timer = setInterval(function () { $('#partial').load('/Home/GetItems/?tipo=@ViewBag.Grupo'); }, 10000); // local
+            
+        //function aa() {
+        //    document.getElementById("load").style.visibility = "visible";
+        //    document.getElementById("partial").style.visibility = "hidden";
+        //    window.clearInterval(timer);
+        //    timer = null;
+        //}
+
+        function refresh() {
+            $.ajaxSetup({
+                // Disable caching of AJAX responses */
+                cache: false
+            });
+            //$('#partial').load('/Home/GetItems'); //local
+            $('#partial').load('/MinaderosValle/Home/GetItems'); //server
+        }
+     
+
+    </script>

@@ -1,0 +1,291 @@
+﻿
+@model List<AytoLosLLanos.Models.Sinoptico>
+@using AytoLosLLanos.Models
+
+
+<div style="width:100%;height:600px;margin-top:3%; margin-left:0%;">
+    <p id="demo" style="margin-left:9%"></p>
+    <svg width="98%" height="90%" style="margin-top:15px;">
+        <g> @*pino*@
+            <circle cx="7%" cy="4%" r="8" stroke="black" stroke-width="0.5" fill="black" >
+                <set id="show" attributeName="visibility" attributeType="CSS" to="visible" begin="0s; hide.end" dur="1s" fill="freeze"/>
+                <set id="hide" attributeName="visibility" attributeType="CSS" to="hidden" begin="show.end" dur="1s" fill="freeze"/>
+            </circle>
+            <rect x="5%" y="5" rx="5" ry="5" width="25%" height="15%" style="fill:transparent;stroke:black;stroke-width:1;opacity:0.5;"></rect> 
+            <text x="10%" y="5%" font-family="Verdana" > DEPÓSITO PINO SANTIAGO </text>
+            <text x="10%" y="9%" font-family="Verdana" font-size="10"> Fecha : n/d </text>
+            <text x="10%" y="11%" font-family="Verdana" font-size="10"> Nivel : n/d  </text>
+            <text x="10%" y="13%" font-family="Verdana" font-size="10"> Volumen : n/d </text>
+            <line x1="8.5%" y1="1%" x2="8.5%" y2="16%" style="stroke:#bfbfbf;stroke-width:2"></line>
+
+            <line x1="30%" y1="8%" x2="68%" y2="8%" style="stroke:#bfbfbf;stroke-width:4"></line>  @* conexion gata*@
+            <line x1="68%" y1="8%" x2="68%" y2="38%" style="stroke:#bfbfbf;stroke-width:4"></line>
+            <line x1="68%" y1="38%" x2="75%" y2="38%" style="stroke:#bfbfbf;stroke-width:4"></line>
+            <line x1="75%" y1="38%" x2="73.5%" y2="37%" style="stroke:#bfbfbf;stroke-width:2"></line>
+            <line x1="75%" y1="38%" x2="73.5%" y2="39%" style="stroke:#bfbfbf;stroke-width:2"></line>
+     
+            <line x1="49%" y1="8%" x2="49%" y2="17%" style="stroke:#bfbfbf;stroke-width:4"></line>  @*conexion tajuya*@
+            <line x1="49%" y1="17%" x2="49.5%" y2="14.5%" style="stroke:#bfbfbf;stroke-width:2"></line>
+            <line x1="49%" y1="17%" x2="48.5%" y2="14.5%" style="stroke:#bfbfbf;stroke-width:2"></line>
+        </g>
+        <g> @*tajuya*@
+            <circle cx="40%" cy="20%" r="8" stroke="black" stroke-width="0.5" fill="@Model[1].Color"></circle> 
+            <rect x="38%" y="17%" rx="5" ry="5" width="22%" height="20%" style="fill:transparent;stroke:black;stroke-width:1;opacity:0.5"></rect> 
+            <rect x="38%" y="17%" rx="5" ry="5" width="22%" height="20%" style="fill:transparent;stroke:black;stroke-width:1;opacity:0;"
+                onmouseover="this.style.cssText = 'fill:#ffff99'" onmouseout="this.style.cssText = 'fill:transparent'"
+                onclick="@("window.location.href='" + @Url.Action("Index1", "Item2", new { estacion = "TAJUYA"}) + "'"); "></rect>  
+            <text x="43%" y="21%" font-family="Verdana" > TAJUYA </text>
+            <text x="43%" y="25%" font-family="Verdana" font-size="10"> Fecha : @Model[1].Fecha </text>
+            <text x="43%" y="27%" font-family="Verdana" font-size="10"> Nivel : @Model[6].Value2 m </text>
+            <text x="43%" y="29%" font-family="Verdana" font-size="10"> Volumen : @Model[6].Value1 m3 </text>
+            <text x="43%" y="31%" font-family="Verdana" font-size="10"> Caudal : @Model[1].Value2 m3/h </text>
+            <text x="43%" y="33%" font-family="Verdana" font-size="10"> Acumualdo : @Model[1].Value1 m3 </text>
+            <line x1="41.5%" y1="17%" x2="41.5%" y2="37%" style="stroke:#bfbfbf;stroke-width:2"></line>
+
+            <line x1="49%" y1="37%" x2="49%" y2="45%" style="stroke:@Model[1].Color2;stroke-width:4"></line>  @*salida tajuya*@
+            <line x1="49%" y1="45%" x2="49.5%" y2="42.5%" style="stroke:@Model[1].Color2;stroke-width:2"></line>
+            <line x1="49%" y1="45%" x2="48.5%" y2="42.5%" style="stroke:@Model[1].Color2;stroke-width:2"></line>
+            @if (Model[1].Value1 > 0 && Model[1].Color != "red" && Request.Browser.Browser != "IE")
+            {
+                <circle cx="49%" r="3" style="stroke: none; fill: #0000ff;">
+                    <animate attributeName="cy" attributeType="XML" from="37%"  to="45%" begin="0s" dur="2s"fill="remove" repeatCount="indefinite" />
+                </circle>
+            }
+
+        </g>
+
+        <g> @*gata*@
+            <circle cx="77%" cy="38%" r="8" stroke="black" stroke-width="0.5" fill="black" >
+                <set id="showx" attributeName="visibility" attributeType="CSS" to="visible" begin="0s; hide.end" dur="1s" fill="freeze"/>
+                <set id="hidex" attributeName="visibility" attributeType="CSS" to="hidden" begin="show.end" dur="1s" fill="freeze"/>
+            </circle>
+            <rect x="75%" y="35%" rx="5" ry="5" width="22%" height="15%" style="fill:transparent;stroke:black;stroke-width:1;opacity:0.5"></rect>  
+            <text x="80%" y="39%" font-family="Verdana" >DEPÓSITO LA GATA </text>
+            <text x="80%" y="43%" font-family="Verdana" font-size="10"> Fecha : n/d </text>
+            <text x="80%" y="45%" font-family="Verdana" font-size="10"> Nivel : n/d</text>
+            <text x="80%" y="47%" font-family="Verdana" font-size="10"> Volumen : n/d </text>
+            <line x1="78.5%" y1="35%" x2="78.5%" y2="50%" style="stroke:#bfbfbf;stroke-width:2"></line>
+
+            <line x1="83%" y1="21%" x2="83%" y2="35%" style="stroke:#bfbfbf;stroke-width:4"></line>  @*conexion fatima*@
+            <line x1="83%" y1="21%" x2="83.5%" y2="23.5%" style="stroke:#bfbfbf;stroke-width:2"></line>
+            <line x1="83%" y1="21%" x2="82.5%" y2="23.5%" style="stroke:#bfbfbf;stroke-width:2"></line>
+            <image x="82.25%" y="30.5%" width="25" height="25" xlink:href="~/Images/pump.gif" />
+        </g>
+
+        <g> @*fatima*@
+            <circle cx="77%" cy="4%" r="8" stroke="black" stroke-width="0.5" fill="@Model[0].Color">
+                @if (Model[0].Color == "red")
+                {
+                    <set id="show0" attributeName="visibility" attributeType="CSS" to="visible" begin="0s; hide.end" dur="1s" fill="freeze"/>
+                    <set id="hide0" attributeName="visibility" attributeType="CSS" to="hidden" begin="show.end" dur="1s" fill="freeze"/>
+                }
+            </circle>
+            <rect x="75%" y="5" rx="5" ry="5" width="22%" height="20%" style="fill:transparent;stroke:black;stroke-width:1;opacity:0.5"></rect>  
+            <rect x="75%" y="5" rx="5" ry="5" width="22%" height="20%" style="fill:transparent;stroke:black;stroke-width:1;opacity:0;"
+                onmouseover="this.style.cssText = 'fill:#ffff99'" onmouseout="this.style.cssText = 'fill:transparent'"
+                onclick="@("window.location.href='" + @Url.Action("Index1", "Item2", new { estacion = "FATIMA"}) + "'"); "></rect> 
+
+            <text x="80%" y="5%" font-family="Verdana" "> FÁTIMA </text>
+            <text x="80%" y="9%" font-family="Verdana" font-size="10"> Fecha : @Model[0].Fecha </text>
+            <text x="80%" y="11%" font-family="Verdana" font-size="10"> Nivel : @Model[7].Value2 m</text>
+            <text x="80%" y="13%" font-family="Verdana" font-size="10"> Volumen :@Model[7].Value1 m3 </text>
+            <text x="80%" y="15%" font-family="Verdana" font-size="10"> Caudal : @Model[0].Value1 m3/h</text>
+            <text x="80%" y="17%" font-family="Verdana" font-size="10"> Acumualdo : @Model[0].Value2 m3</text>
+            <line x1="78.5%" y1="1%" x2="78.5%" y2="21%" style="stroke:#bfbfbf;stroke-width:2"></line>
+
+            <line x1="90%" y1="21%" x2="90%" y2="31%" style="stroke:@Model[0].Color2;stroke-width:4"></line>  @*salida fatima*@
+            <line x1="90%" y1="31%" x2="90.5%" y2="28.5%" style="stroke:@Model[0].Color2;stroke-width:2"></line>
+            <line x1="90%" y1="31%" x2="89.5%" y2="28.5%" style="stroke:@Model[0].Color2;stroke-width:2"></line>
+            @if (Model[0].Value1 > 0 && Model[0].Color != "red" && Request.Browser.Browser != "IE")
+            {
+                <circle cx="90%" r="3" style="stroke: none; fill: #0000ff;">
+                    <animate attributeName="cy" attributeType="XML" from="21%"  to="31%" begin="0s" dur="2s"fill="remove" repeatCount="indefinite" />
+                </circle>
+            }
+        </g>
+
+        <g> @*deposito*@
+            <circle cx="7%" cy="53%" r="8" stroke="black" stroke-width="0.5" fill="@Model[5].Color">
+             @if (Model[5].Color == "red")
+                {
+                    <set id="show5" attributeName="visibility" attributeType="CSS" to="visible" begin="0s; hide.end" dur="1s" fill="freeze"/>
+                    <set id="hide5" attributeName="visibility" attributeType="CSS" to="hidden" begin="show.end" dur="1s" fill="freeze"/>
+                }
+            </circle>
+            <rect x="5%" y="50%" rx="5" ry="5" width="68%" height="15%" style="fill:transparent;stroke:black;stroke-width:1;opacity:0.5"></rect>  
+            <rect x="5%" y="50%" rx="5" ry="5" width="68%" height="15%" style="fill:transparent;stroke:black;stroke-width:1;opacity:0;"
+                onmouseover="this.style.cssText = 'fill:#ffff99'" onmouseout="this.style.cssText = 'fill:transparent'"
+                onclick="@("window.location.href='" + @Url.Action("Index1", "Item2", new { estacion = "HERMOSILLA", idTipo = "45" , idTipo1 = "44"}) + "'"); "></rect>  
+            <text x="10%" y="54%" font-family="Verdana" > DEPÓSITO HERMOSILLA </text>
+            <text x="10%" y="58%" font-family="Verdana" font-size="10"> Fecha : @Model[5].Fecha </text>
+            <text x="10%" y="60%" font-family="Verdana" font-size="10"> Nivel : @Model[5].Value2 m</text>
+            <text x="10%" y="62%" font-family="Verdana" font-size="10"> Volumen : @Model[5].Value1 m3</text>
+            <line x1="8.5%" y1="50%" x2="8.5%" y2="65%" style="stroke:#bfbfbf;stroke-width:2"></line>
+
+            <line x1="16%" y1="50%" x2="16%" y2="16%" style="stroke:#bfbfbf;stroke-width:4"></line> @*conexion pino*@
+            <line x1="16%" y1="16%" x2="16.5%" y2="18.5%" style="stroke:#bfbfbf;stroke-width:2"></line>
+            <line x1="16%" y1="16%" x2="15.5%" y2="18.5%" style="stroke:#bfbfbf;stroke-width:2"></line>
+
+            <line x1="16%" y1="75%" x2="16%" y2="65%" style="stroke:@Model[2].Color2;stroke-width:4"></line> @*conexion vaso norte*@
+            <line x1="16%" y1="75%" x2="16.5%" y2="72.5%" style="stroke:@Model[2].Color2;stroke-width:2"></line>
+            <line x1="16%" y1="75%" x2="15.5%" y2="72.5%" style="stroke:@Model[2].Color2;stroke-width:2"></line>
+            @if (Model[2].Value1 > 0 && Model[2].Color != "red" && Request.Browser.Browser != "IE")
+            {
+                <circle cx="16%" r="3" style="stroke: none; fill: #0000ff;">
+                    <animate attributeName="cy" attributeType="XML" from="65%"  to="75%" begin="0s" dur="2s"fill="remove" repeatCount="indefinite" />
+                </circle>
+            }
+
+            <line x1="38%" y1="75%" x2="38%" y2="65%" style="stroke:@Model[3].Color2;stroke-width:4"></line> @*conexion vaso sur*@
+            <line x1="38%" y1="75%" x2="38.5%" y2="72.5%" style="stroke:@Model[3].Color2;stroke-width:2"></line>
+            <line x1="38%" y1="75%" x2="37.5%" y2="72.5%" style="stroke:@Model[3].Color2;stroke-width:2"></line>
+            @if (Model[3].Value1 > 0 && Model[3].Color != "red" && Request.Browser.Browser != "IE")
+            {
+                <circle cx="38%" r="3" style="stroke: none; fill: #0000ff;">
+                    <animate attributeName="cy" attributeType="XML" from="65%"  to="75%" begin="0s" dur="2s"fill="remove" repeatCount="indefinite" />
+                </circle>
+            }
+            
+            <line x1="62%" y1="75%" x2="62%" y2="65%" style="stroke:@Model[4].Color2;stroke-width:4"></line> @*conexion tenisca*@
+            <line x1="62%" y1="75%" x2="61.5%" y2="72.5%" style="stroke:@Model[4].Color2;stroke-width:2"></line>
+            <line x1="62%" y1="75%" x2="62.5%" y2="72.5%" style="stroke:@Model[4].Color2;stroke-width:2"></line>
+            @if (Model[4].Value1 > 0 && Model[4].Color != "red" && Request.Browser.Browser != "IE")
+            {
+                <circle cx="62%" r="3" style="stroke: none; fill: #0000ff;">
+                    <animate attributeName="cy" attributeType="XML" from="65%"  to="75%" begin="0s" dur="2s"fill="remove" repeatCount="indefinite" />
+                </circle>
+            }
+            <image x="15.25%" y="45.5%" width="25" height="25" xlink:href="/AytoLosLLanos/Images/pump.gif" />
+        </g>
+
+        <g> @*tunel hermosilla*@
+            <circle cx="77%" cy="78%" r="8" stroke="black" stroke-width="0.5" fill="black" >
+                <set id="showy" attributeName="visibility" attributeType="CSS" to="visible" begin="0s; hide.end" dur="1s" fill="freeze"/>
+                <set id="hidey" attributeName="visibility" attributeType="CSS" to="hidden" begin="show.end" dur="1s" fill="freeze"/>
+            </circle> 
+            <rect x="75%" y="75%" rx="5" ry="5" width="22%" height="15%" style="fill:transparent;stroke:black;stroke-width:1;opacity:0.5"></rect>  
+            <text x="80%" y="79%" font-family="Verdana" > TUNEL HERMOSIILA </text>
+            <text x="80%" y="83%" font-family="Verdana" font-size="10"> Fecha : n/d </text>
+            <text x="80%" y="85%" font-family="Verdana" font-size="10"> Caudal : n/d </text>
+            <text x="80%" y="87%" font-family="Verdana" font-size="10"> Acumualdo : n/d </text>
+            <line x1="78.5%" y1="75%" x2="78.5%" y2="90%" style="stroke:#bfbfbf;stroke-width:2"></line>
+
+            <line x1="85%" y1="58%" x2="85%" y2="75%" style="stroke:#bfbfbf;stroke-width:4"></line> @*conexion deposito*@
+            <line x1="85%" y1="58%" x2="73%" y2="58%" style="stroke:#bfbfbf;stroke-width:4"></line>
+            <line x1="73%" y1="58%" x2="74.5%" y2="57%" style="stroke:#bfbfbf;stroke-width:2"></line>
+            <line x1="73%" y1="58%" x2="74.5%" y2="59%" style="stroke:#bfbfbf;stroke-width:2"></line>
+
+        </g>
+
+        <g> @*vaso norte*@
+            <circle cx="7%" cy="78%" r="8" stroke="black" stroke-width="0.5" fill="@Model[2].Color">
+            @if (Model[2].Color == "red")
+                {
+                    <set id="show2" attributeName="visibility" attributeType="CSS" to="visible" begin="0s; hide.end" dur="1s" fill="freeze"/>
+                    <set id="hide2" attributeName="visibility" attributeType="CSS" to="hidden" begin="show.end" dur="1s" fill="freeze"/>
+                }
+            </circle>
+            <rect x="5%" y="75%" rx="5" ry="5" width="22%" height="15%" style="fill:transparent;stroke:black;stroke-width:1;opacity:0.5"></rect>  
+            <rect x="5%" y="75%" rx="5" ry="5" width="22%" height="15%" style="fill:transparent;stroke:black;stroke-width:1;opacity:0"
+                onmouseover="this.style.cssText = 'fill:#ffff99'" onmouseout="this.style.cssText = 'fill:transparent'"
+                onclick="@("window.location.href='" + @Url.Action("Index1", "Item2", new { estacion = "HERMOSILLA", idTipo = "39", idTipo1 = "38"}) + "'"); "></rect>  
+            <text x="10%" y="79%" font-family="Verdana" > SALIDA NORTE </text>
+            <text x="10%" y="83%" font-family="Verdana" font-size="10"> Fecha : @Model[2].Fecha </text>
+            <text x="10%" y="85%" font-family="Verdana" font-size="10"> Caudal : @Model[2].Value1 m3/h</text>
+            <text x="10%" y="87%" font-family="Verdana" font-size="10"> Acumualdo : @Model[2].Value2 m3</text>
+            <line x1="8.5%" y1="75%" x2="8.5%" y2="90%" style="stroke:#bfbfbf;stroke-width:2"></line>
+
+            <line x1="16%" y1="90%" x2="16%" y2="100%" style="stroke:@Model[2].Color2;stroke-width:4"></line> @*salida vaso norte*@
+            <line x1="16%" y1="100%" x2="15.5%" y2="97.5%" style="stroke:@Model[2].Color2;stroke-width:2"></line>
+            <line x1="16%" y1="100%" x2="16.5%" y2="97.5%" style="stroke:@Model[2].Color2;stroke-width:2"></line>
+            @if (Model[2].Value1 > 0 && Model[2].Color != "red" && Request.Browser.Browser != "IE")
+            {
+                <circle cx="16%" r="3" style="stroke: none; fill: #0000ff;">
+                    <animate attributeName="cy" attributeType="XML" from="90%"  to="100%" begin="0s" dur="2s"fill="remove" repeatCount="indefinite" />
+                </circle>
+            }
+        </g>
+         <g> @*vaso sur*@
+            <circle cx="30%" cy="78%" r="8" stroke="black" stroke-width="0.5" fill="@Model[3].Color">
+            @if (Model[3].Color == "red")
+                {
+                    <set id="show3" attributeName="visibility" attributeType="CSS" to="visible" begin="0s; hide.end" dur="1s" fill="freeze"/>
+                    <set id="hide3" attributeName="visibility" attributeType="CSS" to="hidden" begin="show.end" dur="1s" fill="freeze"/>
+                }
+            </circle>
+            <rect x="28%" y="75%" rx="5" ry="5" width="22%" height="15%" style="fill:transparent;stroke:black;stroke-width:1;opacity:0.5"></rect> 
+            <rect x="28%" y="75%" rx="5" ry="5" width="22%" height="15%" style="fill:transparent;stroke:black;stroke-width:1;opacity:0"
+                onmouseover="this.style.cssText = 'fill:#ffff99'" onmouseout="this.style.cssText = 'fill:transparent'"
+                onclick="@("window.location.href='" + @Url.Action("Index1", "Item2", new { estacion = "HERMOSILLA", idTipo = "41", idTipo1 = "40"}) + "'"); "></rect>   
+            <text x="33%" y="79%" font-family="Verdana" > SALIDA SUR </text>
+            <text x="33%" y="83%" font-family="Verdana" font-size="10"> Fecha : @Model[3].Fecha </text>
+            <text x="33%" y="85%" font-family="Verdana" font-size="10"> Caudal : @Model[3].Value1 m3/h</text>
+            <text x="33%" y="87%" font-family="Verdana" font-size="10"> Acumualdo : @Model[3].Value2 m3</text>
+            <line x1="31.5%" y1="75%" x2="31.5%" y2="90%" style="stroke:#bfbfbf;stroke-width:2"></line>
+
+            <line x1="38%" y1="90%" x2="38%" y2="100%" style="stroke:@Model[3].Color2;stroke-width:4"></line> @*salida vaso sur*@
+            <line x1="38%" y1="100%" x2="38.5%" y2="97.5%" style="stroke:@Model[3].Color2;stroke-width:2"></line>
+            <line x1="38%" y1="100%" x2="37.5%" y2="97.5%" style="stroke:@Model[3].Color2;stroke-width:2"></line>
+            @if (Model[3].Value1 > 0 && Model[3].Color != "red" && Request.Browser.Browser != "IE")
+            {
+                <circle cx="38%" r="3" style="stroke: none; fill: #0000ff;">
+                    <animate attributeName="cy" attributeType="XML" from="90%"  to="100%" begin="0s" dur="2s"fill="remove" repeatCount="indefinite" />
+                </circle>
+            }
+        </g>
+        <g> @*tenisca*@
+            <circle cx="53%" cy="78%" r="8" stroke="black" stroke-width="0.5" fill="@Model[4].Color" >
+            @if (Model[4].Color == "red")
+                {
+                    <set id="show4" attributeName="visibility" attributeType="CSS" to="visible" begin="0s; hide.end" dur="1s" fill="freeze"/>
+                    <set id="hide4" attributeName="visibility" attributeType="CSS" to="hidden" begin="show.end" dur="1s" fill="freeze"/>
+                }
+            </circle>
+            <rect x="51%" y="75%" rx="5" ry="5" width="22%" height="15%" style="fill:transparent;stroke:black;stroke-width:1;opacity:0.5"></rect>  
+            <rect x="51%" y="75%" rx="5" ry="5" width="22%" height="15%" style="fill:transparent;stroke:black;stroke-width:1;opacity:0"
+                onmouseover="this.style.cssText = 'fill:#ffff99'" onmouseout="this.style.cssText = 'fill:transparent'"
+                onclick="@("window.location.href='" + @Url.Action("Index1", "Item2", new { estacion = "HERMOSILLA", idTipo = "43", idTipo1 = "42"}) + "'"); "></rect>  
+            <text x="56%" y="79%" font-family="Verdana" > SALIDA TENISCA </text>
+            <text x="56%" y="83%" font-family="Verdana" font-size="10"> Fecha : @Model[4].Fecha </text>
+            <text x="56%" y="85%" font-family="Verdana" font-size="10"> Caudal : @Model[4].Value1 m3/h</text>
+            <text x="56%" y="87%" font-family="Verdana" font-size="10">  Acumualdo : @Model[4].Value2 m3</text>
+            <line x1="54.5%" y1="75%" x2="54.5%" y2="90%" style="stroke:#bfbfbf;stroke-width:2"></line>
+
+            <line x1="62%" y1="90%" x2="62%" y2="100%" style="stroke:@Model[4].Color2;stroke-width:4"></line> @*salida tenisca*@
+            <line x1="62%" y1="100%" x2="61.5%" y2="97.5%" style="stroke:@Model[4].Color2;stroke-width:2"></line>
+            <line x1="62%" y1="100%" x2="62.5%" y2="97.5%" style="stroke:@Model[4].Color2;stroke-width:2"></line>
+            @if (Model[4].Value1 > 0 && Model[4].Color != "red" && Request.Browser.Browser != "IE")
+            {
+                <circle cx="62%" r="3" style="stroke: none; fill: #0000ff;">
+                    <animate attributeName="cy" attributeType="XML" from="90%"  to="100%" begin="0s" dur="2s"fill="remove" repeatCount="indefinite" />
+                </circle>
+            }
+        </g>
+    </svg>
+    <svg width="90%" height="4%" style="border-style:solid; margin-left:5%; border-color:lightgray; border-width:thin; margin-top:5px">
+        <g>
+            <circle cx="15%" cy="48%" r="6" stroke="black" stroke-width="0.5" fill="green" ></circle>
+            <text x="17%" y="60%" font-family="Verdana" font-size="10px" > Útl. lectura < 60 min </text>
+            <circle cx="35%" cy="48%" r="6" stroke="black" stroke-width="0.5" fill="orange" ></circle>
+            <text x="37%" y="60%" font-family="Verdana" font-size="10px"> 60 min  <= Útl. lectura < 6 h </text>
+            <circle cx="55%" cy="48%" r="6" stroke="black" stroke-width="0.5" fill="red" ></circle>
+            <text x="57%" y="60%" font-family="Verdana" font-size="10px"> 6 h  <= Útl. lectura < 24 h </text>
+            <circle cx="75%" cy="48%" r="6" stroke="black" stroke-width="0.5" fill="black" ></circle>
+            <text x="77%" y="60%" font-family="Verdana" font-size="10px"> 24 h  <= Útl. lectura </text>
+        </g>
+    </svg>
+</div>
+
+<script>
+    var now = new Date();
+    document.getElementById("demo").innerHTML = "Última conexión : " + now.toLocaleDateString() + " " + now.toLocaleTimeString();
+
+    window.onunload = function () {
+        $.ajax({
+            url: '/Sinoptico/Index',
+            type: 'POST',
+            datatype: "json",
+            contentType: "application/json; charset=utf-8"
+        });
+    };
+</script>

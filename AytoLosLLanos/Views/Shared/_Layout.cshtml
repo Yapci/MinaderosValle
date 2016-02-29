@@ -1,0 +1,46 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <link href="~/Images/linelogo.png" rel="shortcut icon" type="image/x-icon" />
+    <link href="~/Content/css/style.css"  rel="stylesheet" type="text/css" media="all" />
+    <link href="~/Content/css/skel.css"  rel="stylesheet" type="text/css" media="all" />
+    <link href="~/Content/css/site.css"  rel="stylesheet" type="text/css" media="all" />
+
+
+    <title>@ViewBag.Title</title>
+@*    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")*@
+</head>
+@*<body style="background-image:url(../images/agua.png);"> *@   @*local*@
+<body @*style="background-image:url(../../ConsejoInsular/images/agua.png);"*@ >
+    <div style="border-top: 2px solid #023d89;"> 
+         <header id="header">
+             @if (HttpContext.Current.User.Identity.IsAuthenticated){
+                    <nav style="border-bottom: 1px solid #2c7c93;">
+                        <ul>
+                            <li><a href="../Home/Index">Inicio</a><li>
+                            <li><a href="~/Item2/Index1?estacion=MINADEROSVALLE">Minaderos Valle</a><li>
+
+@*                            <li><a href="~/Sinoptico/Index">Sinóptico</a><li>*@
+                            @*<li><a href="~/Home/Contact"><img src="~/Images/contact.png" style="width:30px;height:30px;" title="Contacto"/></a><li>*@
+                                <li>
+                                @Html.Partial("_LoginPartial")  
+                                </li>
+    @*                        <a href="#" class="button special">Identificarse</a>*@
+                      </ul>
+                    </nav>
+                    <img style="margin-left:5%; margin-top:2%" src="~/Images/galaguatavar.png" />
+             }
+        </header>
+    </div>
+    @RenderBody()
+    <div style="background: none repeat scroll 0% 0% #fff; height:100px;padding: 0px 50px 0px 50px">
+        <div style="text-align:center;border: medium none;">
+            <h2 style="font-size:12px;padding-top:30px;">© Demase S.L. 2015.</h2>
+        </div>
+    </div>
+    @RenderSection("scripts", required: false)
+</body>
+</html>

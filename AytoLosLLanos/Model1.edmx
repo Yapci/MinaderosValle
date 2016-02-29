@@ -1,0 +1,342 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="2.0" xmlns:edmx="http://schemas.microsoft.com/ado/2008/10/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="ESTACIONESModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+        <EntityContainer Name="ESTACIONESModelStoreContainer">
+          <EntitySet Name="Estacion" EntityType="ESTACIONESModel.Store.Estacion" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Estacion_Propietario" EntityType="ESTACIONESModel.Store.Estacion_Propietario" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Propietario" EntityType="ESTACIONESModel.Store.Propietario" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Tabla" EntityType="ESTACIONESModel.Store.Tabla" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Tipo" EntityType="ESTACIONESModel.Store.Tipo" store:Type="Tables" Schema="dbo" />
+          <AssociationSet Name="FK_Estacion_Propietario_Estacion1" Association="ESTACIONESModel.Store.FK_Estacion_Propietario_Estacion1">
+            <End Role="Estacion" EntitySet="Estacion" />
+            <End Role="Estacion_Propietario" EntitySet="Estacion_Propietario" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Estacion_Propietario_Propietario1" Association="ESTACIONESModel.Store.FK_Estacion_Propietario_Propietario1">
+            <End Role="Propietario" EntitySet="Propietario" />
+            <End Role="Estacion_Propietario" EntitySet="Estacion_Propietario" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Estacion_Tabla" Association="ESTACIONESModel.Store.FK_Estacion_Tabla">
+            <End Role="Tabla" EntitySet="Tabla" />
+            <End Role="Estacion" EntitySet="Estacion" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tipo_Estacion" Association="ESTACIONESModel.Store.FK_Tipo_Estacion">
+            <End Role="Estacion" EntitySet="Estacion" />
+            <End Role="Tipo" EntitySet="Tipo" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Estacion">
+          <Key>
+            <PropertyRef Name="IdEstacion" />
+          </Key>
+          <Property Name="IdEstacion" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="nvarchar" MaxLength="50" />
+          <Property Name="Alias" Type="nvarchar" MaxLength="50" />
+          <Property Name="Longitud" Type="float" />
+          <Property Name="Latitud" Type="float" />
+          <Property Name="IdTabla" Type="int" />
+          <Property Name="Descripcion" Type="nvarchar" MaxLength="1000" />
+          <Property Name="PrimerRegistro" Type="nvarchar" MaxLength="50" />
+          <Property Name="UltimoRegistro" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Estacion_Propietario">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="IdEstacion" Type="int" Nullable="false" />
+          <Property Name="IdPropietario" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Propietario">
+          <Key>
+            <PropertyRef Name="IdPropietario" />
+          </Key>
+          <Property Name="IdPropietario" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="UserName" Type="nvarchar" MaxLength="50" />
+          <Property Name="Password" Type="nvarchar" MaxLength="50" />
+          <Property Name="Alias" Type="nvarchar" MaxLength="50" />
+          <Property Name="Conexiones" Type="int" />
+        </EntityType>
+        <EntityType Name="Tabla">
+          <Key>
+            <PropertyRef Name="IdTabla" />
+          </Key>
+          <Property Name="IdTabla" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Tipo">
+          <Key>
+            <PropertyRef Name="IdTipo" />
+          </Key>
+          <Property Name="IdTipo" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="nvarchar" MaxLength="50" />
+          <Property Name="Canal" Type="int" />
+          <Property Name="Factor" Type="float" />
+          <Property Name="IdEstacion" Type="int" />
+        </EntityType>
+        <Association Name="FK_Estacion_Propietario_Estacion1">
+          <End Role="Estacion" Type="ESTACIONESModel.Store.Estacion" Multiplicity="1" />
+          <End Role="Estacion_Propietario" Type="ESTACIONESModel.Store.Estacion_Propietario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Estacion">
+              <PropertyRef Name="IdEstacion" />
+            </Principal>
+            <Dependent Role="Estacion_Propietario">
+              <PropertyRef Name="IdEstacion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Estacion_Propietario_Propietario1">
+          <End Role="Propietario" Type="ESTACIONESModel.Store.Propietario" Multiplicity="1" />
+          <End Role="Estacion_Propietario" Type="ESTACIONESModel.Store.Estacion_Propietario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Propietario">
+              <PropertyRef Name="IdPropietario" />
+            </Principal>
+            <Dependent Role="Estacion_Propietario">
+              <PropertyRef Name="IdPropietario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Estacion_Tabla">
+          <End Role="Tabla" Type="ESTACIONESModel.Store.Tabla" Multiplicity="0..1" />
+          <End Role="Estacion" Type="ESTACIONESModel.Store.Estacion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tabla">
+              <PropertyRef Name="IdTabla" />
+            </Principal>
+            <Dependent Role="Estacion">
+              <PropertyRef Name="IdTabla" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tipo_Estacion">
+          <End Role="Estacion" Type="ESTACIONESModel.Store.Estacion" Multiplicity="0..1" />
+          <End Role="Tipo" Type="ESTACIONESModel.Store.Tipo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Estacion">
+              <PropertyRef Name="IdEstacion" />
+            </Principal>
+            <Dependent Role="Tipo">
+              <PropertyRef Name="IdEstacion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="ESTACIONESModel" Alias="Self" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+        <EntityContainer Name="ESTACIONESEntities" annotation:LazyLoadingEnabled="true" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation">
+          <EntitySet Name="Estacions" EntityType="ESTACIONESModel.Estacion" />
+          <EntitySet Name="Estacion_Propietario" EntityType="ESTACIONESModel.Estacion_Propietario" />
+          <EntitySet Name="Tablas" EntityType="ESTACIONESModel.Tabla" />
+          <EntitySet Name="Tipoes" EntityType="ESTACIONESModel.Tipo" />
+          <AssociationSet Name="FK_Estacion_Propietario_Estacion1" Association="ESTACIONESModel.FK_Estacion_Propietario_Estacion1">
+            <End Role="Estacion" EntitySet="Estacions" />
+            <End Role="Estacion_Propietario" EntitySet="Estacion_Propietario" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Estacion_Tabla" Association="ESTACIONESModel.FK_Estacion_Tabla">
+            <End Role="Tabla" EntitySet="Tablas" />
+            <End Role="Estacion" EntitySet="Estacions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tipo_Estacion" Association="ESTACIONESModel.FK_Tipo_Estacion">
+            <End Role="Estacion" EntitySet="Estacions" />
+            <End Role="Tipo" EntitySet="Tipoes" />
+          </AssociationSet>
+          <EntitySet Name="Propietarios" EntityType="ESTACIONESModel.Propietario" />
+          <AssociationSet Name="FK_Estacion_Propietario_Propietario1" Association="ESTACIONESModel.FK_Estacion_Propietario_Propietario1">
+            <End Role="Propietario" EntitySet="Propietarios" />
+            <End Role="Estacion_Propietario" EntitySet="Estacion_Propietario" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Estacion">
+          <Key>
+            <PropertyRef Name="IdEstacion" />
+          </Key>
+          <Property Name="IdEstacion" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
+          <Property Name="Nombre" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="Alias" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="Longitud" Type="Double" />
+          <Property Name="Latitud" Type="Double" />
+          <Property Name="IdTabla" Type="Int32" />
+          <Property Name="Descripcion" Type="String" MaxLength="1000" Unicode="true" FixedLength="false" />
+          <Property Name="PrimerRegistro" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="UltimoRegistro" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="Estacion_Propietario" Relationship="ESTACIONESModel.FK_Estacion_Propietario_Estacion1" FromRole="Estacion" ToRole="Estacion_Propietario" />
+          <NavigationProperty Name="Tabla" Relationship="ESTACIONESModel.FK_Estacion_Tabla" FromRole="Estacion" ToRole="Tabla" />
+          <NavigationProperty Name="Tipoes" Relationship="ESTACIONESModel.FK_Tipo_Estacion" FromRole="Estacion" ToRole="Tipo" />
+        </EntityType>
+        <EntityType Name="Estacion_Propietario">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
+          <Property Name="IdEstacion" Type="Int32" Nullable="false" />
+          <Property Name="IdPropietario" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Estacion" Relationship="ESTACIONESModel.FK_Estacion_Propietario_Estacion1" FromRole="Estacion_Propietario" ToRole="Estacion" />
+          <NavigationProperty Name="Propietario" Relationship="ESTACIONESModel.FK_Estacion_Propietario_Propietario1" FromRole="Estacion_Propietario" ToRole="Propietario" />
+        </EntityType>
+        <EntityType Name="Tabla">
+          <Key>
+            <PropertyRef Name="IdTabla" />
+          </Key>
+          <Property Name="IdTabla" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
+          <Property Name="Nombre" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <NavigationProperty Name="Estacions" Relationship="ESTACIONESModel.FK_Estacion_Tabla" FromRole="Tabla" ToRole="Estacion" />
+        </EntityType>
+        <EntityType Name="Tipo">
+          <Key>
+            <PropertyRef Name="IdTipo" />
+          </Key>
+          <Property Name="IdTipo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
+          <Property Name="Nombre" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="Canal" Type="Int32" />
+          <Property Name="Factor" Type="Double" />
+          <Property Name="IdEstacion" Type="Int32" />
+          <NavigationProperty Name="Estacion" Relationship="ESTACIONESModel.FK_Tipo_Estacion" FromRole="Tipo" ToRole="Estacion" />
+        </EntityType>
+        <Association Name="FK_Estacion_Propietario_Estacion1">
+          <End Role="Estacion" Type="ESTACIONESModel.Estacion" Multiplicity="1" />
+          <End Role="Estacion_Propietario" Type="ESTACIONESModel.Estacion_Propietario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Estacion">
+              <PropertyRef Name="IdEstacion" />
+            </Principal>
+            <Dependent Role="Estacion_Propietario">
+              <PropertyRef Name="IdEstacion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Estacion_Tabla">
+          <End Role="Tabla" Type="ESTACIONESModel.Tabla" Multiplicity="0..1" />
+          <End Role="Estacion" Type="ESTACIONESModel.Estacion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tabla">
+              <PropertyRef Name="IdTabla" />
+            </Principal>
+            <Dependent Role="Estacion">
+              <PropertyRef Name="IdTabla" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tipo_Estacion">
+          <End Role="Estacion" Type="ESTACIONESModel.Estacion" Multiplicity="0..1" />
+          <End Role="Tipo" Type="ESTACIONESModel.Tipo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Estacion">
+              <PropertyRef Name="IdEstacion" />
+            </Principal>
+            <Dependent Role="Tipo">
+              <PropertyRef Name="IdEstacion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Propietario">
+          <Key>
+            <PropertyRef Name="IdPropietario" />
+          </Key>
+          <Property Type="Int32" Name="IdPropietario" Nullable="false" a:StoreGeneratedPattern="Identity" xmlns:a="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
+          <Property Type="String" Name="UserName" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Password" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Alias" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Estacion_Propietario" Relationship="ESTACIONESModel.FK_Estacion_Propietario_Propietario1" FromRole="Propietario" ToRole="Estacion_Propietario" />
+          <Property Type="Int32" Name="Conexiones" />
+        </EntityType>
+        <Association Name="FK_Estacion_Propietario_Propietario1">
+          <End Type="ESTACIONESModel.Propietario" Role="Propietario" Multiplicity="1" />
+          <End Type="ESTACIONESModel.Estacion_Propietario" Role="Estacion_Propietario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Propietario">
+              <PropertyRef Name="IdPropietario" />
+            </Principal>
+            <Dependent Role="Estacion_Propietario">
+              <PropertyRef Name="IdPropietario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ESTACIONESModelStoreContainer" CdmEntityContainer="ESTACIONESEntities">
+          <EntitySetMapping Name="Estacions">
+            <EntityTypeMapping TypeName="ESTACIONESModel.Estacion">
+              <MappingFragment StoreEntitySet="Estacion">
+                <ScalarProperty Name="IdEstacion" ColumnName="IdEstacion" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Alias" ColumnName="Alias" />
+                <ScalarProperty Name="Longitud" ColumnName="Longitud" />
+                <ScalarProperty Name="Latitud" ColumnName="Latitud" />
+                <ScalarProperty Name="IdTabla" ColumnName="IdTabla" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="PrimerRegistro" ColumnName="PrimerRegistro" />
+                <ScalarProperty Name="UltimoRegistro" ColumnName="UltimoRegistro" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Estacion_Propietario">
+            <EntityTypeMapping TypeName="ESTACIONESModel.Estacion_Propietario">
+              <MappingFragment StoreEntitySet="Estacion_Propietario">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="IdEstacion" ColumnName="IdEstacion" />
+                <ScalarProperty Name="IdPropietario" ColumnName="IdPropietario" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tablas">
+            <EntityTypeMapping TypeName="ESTACIONESModel.Tabla">
+              <MappingFragment StoreEntitySet="Tabla">
+                <ScalarProperty Name="IdTabla" ColumnName="IdTabla" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tipoes">
+            <EntityTypeMapping TypeName="ESTACIONESModel.Tipo">
+              <MappingFragment StoreEntitySet="Tipo">
+                <ScalarProperty Name="IdTipo" ColumnName="IdTipo" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Canal" ColumnName="Canal" />
+                <ScalarProperty Name="Factor" ColumnName="Factor" />
+                <ScalarProperty Name="IdEstacion" ColumnName="IdEstacion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Propietarios">
+            <EntityTypeMapping TypeName="ESTACIONESModel.Propietario">
+              <MappingFragment StoreEntitySet="Propietario">
+                <ScalarProperty Name="Conexiones" ColumnName="Conexiones" />
+                <ScalarProperty Name="Alias" ColumnName="Alias" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="IdPropietario" ColumnName="IdPropietario" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2008/10/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams />
+  </Designer>
+</edmx:Edmx>

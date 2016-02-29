@@ -1,0 +1,42 @@
+﻿@model AytoLosLLanos.Models.EstacionSinoptico
+
+    <p id="demo" style="margin-left:9%; margin-bottom:5px; margin-top:5px"></p>
+<section id="one"  class="wrapper style1 special">
+<div class="container" style="width:70%; margin-right:auto">
+					<div class="row 150%">
+						<div class="4u 12u$(medium)" style="border-color: #D11A1E #FFF #FFF;cursor:pointer;margin-left:35%">
+							<section class="box" onmouseover="this.style.cssText = 'background-color:#ffff99'" onmouseout="this.style.cssText = 'background-color:white'" onclick="@("window.location.href='" + @Url.Action("Index1", "Item2", new { estacion = "MINADEROSVALLE"}) + "'"); ">
+                                <svg height="20" width="150">
+                                    <circle cx="10" cy="10" r="9"   fill="@Model.lstSinoptico[0].Color">
+                                     @if (Model.lstSinoptico[0].Color == "red" || Model.lstSinoptico[0].Color == "black")
+                                     {
+                                        <set id="show" attributeName="visibility" attributeType="CSS" to="visible" begin="0s; hide.end" dur="1s" fill="freeze"/>
+                                        <set id="hide" attributeName="visibility" attributeType="CSS" to="hidden" begin="show.end" dur="1s" fill="freeze"/>
+                                     }
+                                    </circle>
+                                </svg>
+                                <i class="icon big rounded color1" style="background-image:url('/minaderosvalle/images/minaderosvalle.png'); "></i>
+								<h3>MINADEROS-VALLE</h3>
+                                <h3 style="margin-top:10px; text-align:left">@Model.lstEstaciones[0].Descripcion</h3>
+                                <h3 style="margin-top:10px; text-align:center; font-size:12px; color:@Model.lstSinoptico[0].Color">Última conexión : @Model.lstSinoptico[0].Fecha</h3>
+							</section>
+                            <div onclick="@("window.location.href='" + @Url.Action("Location", "Home", new { estacion = "MINADEROSVALLE" }) + "'");">
+                                <img src="~/images/map.png" style="width:10%; height:10%; cursor:pointer" alt="Localización" title="Localización" />
+                            </div>
+						</div>										
+					</div>
+				</div>
+ </section>
+<script>
+    var now = new Date();
+    document.getElementById("demo").innerHTML = "Última conexión : " + now.toLocaleDateString() + " " + now.toLocaleTimeString();
+
+    window.onunload = function () {
+        $.ajax({
+            url: '/Home/Index',
+            type: 'POST',
+            datatype: "json",
+            contentType: "application/json; charset=utf-8"
+        });
+    };
+</script>

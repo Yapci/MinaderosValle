@@ -1,0 +1,44 @@
+﻿@model AytoLosLLanos.Estacion
+@{
+    ViewBag.Title = "Localización - Consejo Insular de Aguas";
+}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script src="http://maps.googleapis.com/maps/api/js?libraries=places&sensor=false"></script>
+<div style="width:100%; height:650px;">
+    <div style="width: 100%;margin: 40px auto;max-width: 80em; margin-left:80px;">
+        <div style="position: relative;padding-right: 0.9375rem;">
+            <h2 style="font-size: 2.3125rem;color: #2c7c95;line-height: 1.8;">
+               @Model.Nombre
+            </h2>       
+            <p style="font-family: inherit;font-weight: normal;font-size: 1rem;line-height: 1.6;margin-bottom: 1.25rem;
+    text-rendering: optimizelegibility;color: #2c7c95;">
+                <strong style="font-weight: bold;line-height: inherit;">Descripción : </strong> @Model.Descripcion
+                <br />
+                <strong style="font-weight: bold;line-height: inherit;">Fecha de alta :</strong> @Model.PrimerRegistro
+            </p>
+        </div>
+    </div>
+    <div id="map" style="width: auto; height: 60%;margin-left:20px; margin-right:20px;margin-top:40px;margin-bottom:20px;border: 2px solid #ECECEC;"></div>
+</div>
+<script type="text/javascript">
+
+    $(document).ready(function () {
+        var latlng = new google.maps.LatLng(parseFloat(@Model.Latitud.ToString().Replace(',','.')), parseFloat(@Model.Longitud.ToString().Replace(',','.')));
+        var options = {
+            zoom: 16, center: latlng,
+            mapTypeId: google.maps.MapTypeId.HYBRID
+        };
+
+        var map = new google.maps.Map(document.getElementById
+			("map"), options);
+
+        var latlng = new google.maps.LatLng(parseFloat(@Model.Latitud.ToString().Replace(',','.')), parseFloat(@Model.Longitud.ToString().Replace(',','.')));
+        var marker = new google.maps.Marker({
+            position: latlng,
+            map: map,
+            icon: '../Images/radio-station-2.png',
+            //title: tx
+        });
+
+    });
+</script>

@@ -1,0 +1,32 @@
+﻿@model AytoLosLLanos.Models.Sinoptico
+@{
+    ViewBag.Title = "Sinóptico";
+}
+<div id="partial" width:100%">
+    @Html.Partial("Partial1", Model.itemModel)
+</div>
+
+<script src="~/Scripts/jquery-1.8.2.min.js"></script>
+    <script type="text/javascript" src="~/Scripts/jQuery.print.js"></script>  
+    <script type="text/javascript">
+        var timer = setInterval(function () { refresh() }, 30000);    // server
+            //timer = setInterval(function () { $('#partial').load('/Home/GetItems/?tipo=@ViewBag.Grupo'); }, 10000); // local
+            
+        function aa() {
+            document.getElementById("load").style.visibility = "visible";
+            document.getElementById("partial").style.visibility = "hidden";
+            window.clearInterval(timer);
+            timer = null;
+        }
+
+        function refresh() {
+            $.ajaxSetup({
+                // Disable caching of AJAX responses */
+                cache: false
+            });
+            //$('#partial').load('/Sinoptico/GetItems'); //local
+            $('#partial').load('/AytoLosLLanos/Sinoptico/GetItems'); //server
+        }
+     
+
+    </script>

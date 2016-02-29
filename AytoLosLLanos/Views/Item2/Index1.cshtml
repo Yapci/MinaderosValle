@@ -1,0 +1,306 @@
+﻿@model List<AytoLosLLanos.Models.Item1>
+@{
+    ViewBag.Title = "Gráfico - " + @ViewBag.Estacion;
+}
+<link rel="stylesheet" href="//code.jquery.com/ui/1.8.24/themes/base/jquery-ui.css">
+<script src="~/Scripts/jquery-1.8.2.js" type="text/javascript"></script>
+<script src="~/Scripts/jquery-ui-1.8.24.js" type="text/javascript"></script>
+<script src="~/Scripts/Highcharts-4.0.1/js/highcharts.js"></script>
+<script src="http://code.highcharts.com/modules/exporting.js"></script>
+@*<link rel="stylesheet" href="//code.jquery.com/ui/1.11.0/themes/smoothness/jquery-ui.css">*@
+@*<link rel="stylesheet" href="//code.jquery.com/ui/1.8.24/themes/base/jquery-ui.css">*@
+@*<script src="//code.jquery.com/jquery-1.10.2.js"></script>
+<script src="//code.jquery.com/ui/1.11.0/jquery-ui.js"></script>*@
+@*<link rel="stylesheet" href="/resources/demos/style.css">*@
+@*<script src="../../Scripts/jquery.accordion.js"></script> *@
+@*<script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
+<script src="../../Scripts/jquery.accordion.js"></script> *@
+
+<div style="width:100%; height:100%; background:#f5f5f5; margin-top:20px;">
+    <div style=" float:right; margin-right:60px; margin-bottom:10px; background:#f5f5f5; margin-top:20px;">
+        <label style="color:#808080 ;font-size:12px;">Pulse F11 para Activar/Desactivar pantalla completa</label>
+    </div>
+    <div style="margin-left:20px;float:left">
+     @using (Html.BeginForm("Report", "Item2", new { id = "PDF", f1 = @ViewBag.f1, f2 = @ViewBag.f2, estacion = @ViewBag.Estacion }, FormMethod.Post, new { target = "_blank" }))
+     {
+         @*<input type="image" style="width:30px;height:30px;" src="~/Images/report.png" alt="Submit" title="Ver informe">*@
+     }
+    </div>
+    <div style="margin-left:20px;float:left">
+     @using (Html.BeginForm("Export", "Item2", new { id = "PDF", f1 = @ViewBag.f1, f2 = @ViewBag.f2, estacion = @ViewBag.Estacion }, FormMethod.Post, new { target = "_blank" }))
+     {
+         @*<input type="image" style="width:30px;height:30px;" src="~/Images/xls.png" alt="Submit" title="Exportar a .xls">*@
+     }
+    </div>
+
+    @*<a style="margin-left:50px" href ="@Url.Action("Report", new { id = "PDF", f1 = @ViewBag.f1, f2 = @ViewBag.f2})"  class="custom">Informe</a>*@
+    <input style="width:95%;margin-left:20px;" class="btn2" type="button" value="Opciones de búsqueda" />
+    <div class="toggle_container">
+        <div style="margin-right:40px">
+       @using (Html.BeginForm())
+       {
+            <div style="margin-left:5%; padding-top:10px;">
+                @using (Html.BeginForm("Index1", "Item2"))
+                {
+                    <label style="float: left;margin-top:10px; margin-right:20px">Desde</label>
+                    <input id="datepicker" style="height:30px;float: left;margin-top:5px" name="f1" value="@ViewBag.fini"/>
+                    <div style="float:left;margin-left:5px;margin-top:4px">
+                        <SELECT id="fechaini" name="fechaini"  style="height:30px; font-size:12px; background-color:white"> 
+                            @for (int i = 0; i < 24; i++)
+                            {
+                                        if (@i < 10)
+                                        {
+                                            if (ViewBag.hini ==@i + ":00"){
+                                                 var a = "0" + @i.ToString();
+                                                <OPTION selected="selected" VALUE="@i">@a:00</OPTION>
+                                            }
+                                            else {
+                                                var a = "0" + @i.ToString();
+                                                <OPTION VALUE="@i">@a:00</OPTION>   
+                                            }
+                                        }
+                                        else {
+                                            if (ViewBag.hini == @i + ":00"){
+                                                <OPTION selected="selected" VALUE="@i">@i.ToString():00</OPTION>
+                                            }
+                                            else {
+                                                <OPTION VALUE="@i">@i:00</OPTION>   
+                                            }
+                                        }
+                                    }
+                            }
+                        </SELECT>
+                    </div>
+                    <label style="width: 50px;float: left;margin-left: 20px;margin-top: 10px;">hasta</label>
+                    <input id="datepicker1" style="height:30px;float: left;margin-top:5px" name="f2" value="@ViewBag.ffin"/>
+                    <div style="float:left;margin-left:5px;margin-top:4px">
+                        <SELECT id="fechafin" name="fechafin"  style="height:30px; font-size:12px; background-color:white"> 
+                            @for (int i = 0; i < 24; i++)
+                            {
+                                        if (@i < 10)
+                                        {
+                                            if (ViewBag.hfin ==@i + ":00"){
+                                                 var a = "0" + @i.ToString();
+                                                <OPTION selected="selected" VALUE="@i">@a:00</OPTION>
+                                            }
+                                            else {
+                                                var a = "0" + @i.ToString();
+                                                <OPTION VALUE="@i">@a:00</OPTION>   
+                                            }
+                                        }
+                                        else {
+                                            if (ViewBag.hfin == @i + ":00")
+                                            {
+                                                <OPTION selected="selected" VALUE="@i">@i.ToString():00</OPTION>
+                                            }
+                                            else {
+                                                <OPTION VALUE="@i">@i:00</OPTION>   
+                                            }
+                                        }
+                                    }
+                            }
+                        </SELECT>
+                    </div>
+                    <label style="float: left;margin-left: 40px;margin-top: 10px;">Nº puntos : </label>
+                    <div style="float:left;margin-left:10px;margin-top:4px">
+                        <SELECT id="puntos" name="puntos"  style="height:30px; font-size:12px; background-color:white"> 
+                            @if (ViewBag.puntos == "100") {
+                                <OPTION selected="selected" VALUE="100">100%</OPTION>
+                            }
+                            else {
+                                 <OPTION VALUE="100">100%</OPTION>  
+                            }
+                            @if (ViewBag.puntos == "50") {
+                                <OPTION selected="selected" VALUE="50">50%</OPTION>
+                            }
+                            else {
+                                 <OPTION VALUE="50">50%</OPTION>  
+                            }
+                        </SELECT>
+                    </div>
+                    <div style="float: left;margin-left: 40px;margin-top: 8px;">
+                        <input id="check" style="float:left;" name="check" type="checkbox" checked/> Tooltip
+                    </div>
+
+                    @*<input  name="f1" id="f1" style="height:30px;" >*@
+                    @*<input name="f2" id="f2" style="height:30px"/>*@
+                    <input name="Est" id="Est" style="visibility:collapse; width:50px" value="@ViewBag.Estacion"/>
+                    <input type="submit" />
+                }
+            </div>
+       }
+       </div>
+    </div>
+
+<script>
+    var param2 = '@ViewBag.fini';
+    if (param2 == "") {
+        $(".toggle_container").hide();
+    }
+
+    $.datepicker.regional['es'] = {
+        closeText: 'Cerrar',
+        prevText: '<Ant',
+        nextText: 'Sig>',
+        currentText: 'Hoy',
+        monthNames: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
+        monthNamesShort: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'],
+        dayNames: ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'],
+        dayNamesShort: ['Dom', 'Lun', 'Mar', 'Mié', 'Juv', 'Vie', 'Sáb'],
+        dayNamesMin: ['Do', 'Lu', 'Ma', 'Mi', 'Ju', 'Vi', 'Sá'],
+        weekHeader: 'Sm',
+        dateFormat: 'dd/mm/yy',
+        firstDay: 1,
+        isRTL: false,
+        showMonthAfterYear: false,
+        yearSuffix: ''
+    };
+    $.datepicker.setDefaults($.datepicker.regional['es']);
+    $("input.btn2").click(function () {
+        $(this).toggleClass("active").next().slideToggle("normal");
+    });
+    $("#datepicker").datepicker({dateFormat : "dd/mm/yy"});
+    $("#datepicker1").datepicker({ dateFormat: "dd/mm/yy" });
+
+
+</script>
+
+@*    <div style="margin-left:35%; padding-top:20px"
+        <h2>@ViewBag.Rango</h2>
+    </div>*@
+
+    <div style="padding-right:50px; margin-left:20px; margin-top:10px" id ="container">
+       @((DotNet.Highcharts.Highcharts)ViewBag.Chart1Model)
+    </div>
+    @*<div style="padding-left:50%;padding-top:10px">
+        <h2>Nº de puntos : @ViewBag.Items</h2>
+    </div>*@
+</div>
+
+@*<link rel="stylesheet" href="//code.jquery.com/ui/1.11.0/themes/smoothness/jquery-ui.css">
+<script src="//code.jquery.com/jquery-1.10.2.js"></script>
+<script src="//code.jquery.com/ui/1.11.0/jquery-ui.js"></script>
+<link rel="stylesheet" href="/resources/demos/style.css">
+<script src="../../Scripts/jquery.accordion.js"></script> 
+<script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
+
+<input style="width:90%;margin-left:5%;" class="btn2" type="button" value="RESUMEN" />
+<div class="toggle_container">
+   <div class="block">
+   @using (Html.BeginForm())
+   {
+<div class="display-field">
+        <table style="width:90%;margin-left:5%;margin-top:20px">
+            <tr>
+                <th>Datos</th>
+                <th>Valor</th>
+            </tr>  
+                  <tr>
+                    <td>
+                        Acumulado
+                    </td>
+                    <td>
+                        @ViewBag.Total m3
+                    </td>
+                </tr>     
+                <tr>
+                    <td>
+                        Caudal medio
+                    </td>
+                    <td>
+                        @ViewBag.Caudal m3 / m
+                    </td>
+                </tr>  
+                <tr>
+                    <td>
+                        Nivel medio
+                    </td>
+                    <td>
+                        @ViewBag.Nivel m
+                    </td>
+                </tr>                 
+        </table>
+    </div>
+   }
+    </div>
+</div>
+<script>
+    $(".toggle_container").hide();
+
+    $("input.btn2").click(function () {
+        $(this).toggleClass("active").next().slideToggle("normal");
+    });
+</script>*@
+@*<a href="@Url.Action("Print", "Informe","Print")" style="padding-top:30px;text-decoration:none;font-size:12px;color:#dd1c1c;">
+    <img src="~/images/print1.png" style="width:30px;height:30px;margin-top:10px;" title="Descargar"/>
+    </a>*@
+
+@*<input style="width:90%;margin-left:5%;margin-top:20px;" class="btn3" type="button" value="INFORME DETALLADO" />
+<div class="toggle_container1">
+   <div class="block">
+   @using (Html.BeginForm())
+   {
+<div class="display-field">
+        <table style="width:90%;margin-left:5%;margin-top:20px;">
+            <tr>
+                @{ 
+                    var names = Model[0];
+                    foreach (var n in names.nombres.ToList())
+                    {
+                        <th>@n.nombre</th>
+                    }             
+                }
+            </tr>  
+            @{
+               foreach (var item in Model.ToList())
+               {
+                    <tr>
+                        <td>
+                           @Html.DisplayFor(modelItem => item.Fecha)
+                        </td>  
+                        @{ foreach (var v in item.valores.ToList())
+                           {
+                               <td>
+                                   @Html.DisplayFor(modelitem1 => v.valor)
+                               </td>
+                           }                        
+                        }   
+                                    
+                    </tr>
+               }
+            }        
+        </table>
+    </div>
+   }
+    </div>
+</div>
+<script>
+    $(".toggle_container1").hide();
+
+    $("input.btn3").click(function () {
+        $(this).toggleClass("active").next().slideToggle("normal");
+    });
+</script>*@
+@*<a href="@Url.Action("Print", "Informe","Print")" style="padding-top:30px;text-decoration:none;font-size:12px;color:#dd1c1c;">
+    <img src="~/images/print1.png" style="width:30px;height:30px;margin-top:10px;" title="Descargar"/>
+    </a>*@
+
+
+<script>
+    $(function () {
+
+        var a = '@ViewBag.check';
+        if (a == 'on') {
+            $('input[name=check]').attr('checked', true);
+        }
+        else {
+            $('input[name=check]').attr('checked', false);
+        }
+
+    });
+
+
+    //today = new Date();
+    //document.getElementById('f1').value = today.getDate() + "/0" + today.getMonth() + "/" + today.getFullYear() + " 00:00";
+    //document.getElementById('f2').value = today.getDate() + 1 + "/0" + today.getMonth() + "/" + today.getFullYear() + " 00:00";
+</script>
