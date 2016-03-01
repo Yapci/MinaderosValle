@@ -354,6 +354,8 @@
     <Content Include="Images\logout.png" />
     <Content Include="Images\map.png" />
     <Content Include="Images\marco.png" />
+    <Content Include="Images\minaderos.png" />
+    <Content Include="Images\minaderosvalle.png" />
     <Content Include="Images\pic02.jpg" />
     <Content Include="Images\pic03.jpg" />
     <Content Include="Images\pic04.jpg" />
