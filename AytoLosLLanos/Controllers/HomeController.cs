@@ -28,7 +28,7 @@ namespace AytoLosLLanos.Controllers
             {
                 EstacionSinoptico estsnp = new EstacionSinoptico();
                 estsnp.lstEstaciones = new List<Estacion>();
-                estsnp.lstEstaciones = context.Estacions.Where(c => c.Alias == "ELLANZE").ToList();
+                estsnp.lstEstaciones = context.Estacions.Where(c => c.Nombre == "MINADEROSVALLE" || c.Nombre == "MINADEROS").ToList();
                 CargarDatos();
                 estsnp.lstSinoptico = new List<Sinoptico>();
                 estsnp.lstSinoptico = lst;
@@ -41,7 +41,8 @@ namespace AytoLosLLanos.Controllers
             // cargar fatima
             SqlConnection cn = new SqlConnection("Data Source=" + server + ";Initial Catalog=Estaciones;User ID=sa;Password=Demase49");
             cn.Open();
-            BuscarValores(cn, "Historico_ELLANZE", 281, 0);
+            BuscarValores(cn, "Historico_MINADEROSVALLE", 326, 327);
+            BuscarValores(cn, "Historico_MINADEROS", 297, 298);
             cn.Close();
         }
 
@@ -87,7 +88,7 @@ namespace AytoLosLLanos.Controllers
         {
             EstacionSinoptico estsnp = new EstacionSinoptico();
             estsnp.lstEstaciones = new List<Estacion>();
-            estsnp.lstEstaciones = context.Estacions.Where(c => c.Alias == "ELLANZE").ToList();
+            estsnp.lstEstaciones = context.Estacions.Where(c => c.Nombre == "MINADEROSVALLE" || c.Nombre == "MINADEROS").ToList();
             CargarDatos();
             estsnp.lstSinoptico = new List<Sinoptico>();
             estsnp.lstSinoptico = lst;
@@ -113,7 +114,7 @@ namespace AytoLosLLanos.Controllers
                     MailMessage mail = new MailMessage();
                     mail.To.Add("yapcibp@gmail.com");
                     mail.From = new MailAddress("EstacionesContacto@gmail.com");
-                    mail.Subject = "ELLANZE - Comentarios";
+                    mail.Subject = "MINADEROS - Comentarios";
                     string Body = c.Apellidos + ", " + c.Nombre + ", " + c.Telefono + "   : ";
                     Body += c.Comentario;
                     mail.Body = Body;
@@ -148,7 +149,6 @@ namespace AytoLosLLanos.Controllers
         {
             return View();
         }
-
 
         public ActionResult Location(string estacion)
         {
